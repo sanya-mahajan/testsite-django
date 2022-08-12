@@ -1,0 +1,57 @@
+{%extends 'base.html'%}
+{%block title%}services{%endblock title%}
+
+{%block body%}
+
+
+
+
+<h1>SERVICES</h1>
+
+
+{% comment %} alert for submitted 
+use iteration under for loop{% endcomment %}
+
+{% if messages %}
+<center>
+<div class="messages" >
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}> 
+        {{ message }}</li>
+    {% endfor %}
+</div>
+</center>
+{% endif %}
+
+
+
+
+<div> check out this <a href="/static/test.txt">text file</a>
+    <br><a href="/">go home</a></div>
+
+
+<form method="post" action="/services">{% csrf_token %}
+
+
+    <center><div class="mb-3" class="<div class="container">
+        
+    
+        <label for="exampleFormControlInput1" class="form-label">imaginary name you wish you had</label>
+        <input name="name" type="name" class="form-control" id="exampleFormControlInput1" placeholder="should be unique...it only belongs to you">
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">type a quote you love</label>
+        <textarea name="quote" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div> <br><br>
+      <div class="mb-3">
+        <label for="exampleFormControlInput2" class="form-label">an adjective that describes you</label>
+        <input name="adjective" type="adjective" class="form-control" id="exampleFormControlInput2">
+      </div>
+      <input type="submit" value="Submit!">
+    </center>
+
+</form>
+
+    {%endblock body%}
+
+

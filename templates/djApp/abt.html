@@ -1,0 +1,25 @@
+{%extends 'base.html'%}
+
+{%block title%}about us{%endblock title%}
+
+{% block head %}ABOUT{% endblock head%}
+
+{%block body%}
+<div> {{info}}
+    <br>
+    <div class="mb-3" class="<div class="container">
+        
+        <form method="POST" action="/your_space">
+            {%csrf_token%}
+        <label for="exampleFormControlInput3" class="form-label" >enter YOUR name out of the ones listed above!</label>
+        <input name="inpname" type="name" class="form-control" id="exampleFormControlInput3" placeholder="if not listed above, go to services" >
+      </div><br>
+      
+      <center><input type="submit" value="go!"><br>
+        
+      </center>
+    </form>
+</div>{%endblock body%}
+
+
+
