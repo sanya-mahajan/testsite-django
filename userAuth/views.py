@@ -1,11 +1,15 @@
-
+from django.urls import reverse
+from http.client import HTTP_PORT
+from urllib import response
 from django.shortcuts import render,HttpResponse,redirect
 
 
 from django.contrib.auth import authenticate,logout,login #in built user model
 from django.contrib.auth.models import User
-
+from djApp import views
+import djApp
 import userAuth
+from djApp.models import mood
 
 # Create your views here.
 
@@ -19,9 +23,10 @@ def loginusr(request):
         if(is_usr!=None):
             login(request,is_usr)
             context={
-                'uname': request.POST.get('usrname') 
-
+                'uname': request.POST.get('usrname') ,
+                
             }
+            
             return render(request,'index.html',context)
         else:
             if(User.objects.filter(username=usrname)):
@@ -47,5 +52,5 @@ def register(request):
 
 def logoutusr(request):
     logout(request)
-    return HttpResponse("you've logged out")
+    return render(request,'logout.html')
     

@@ -3,17 +3,22 @@
 {% block head%}<b>YOUR QUOTE</b>
 {%endblock head%}
 {% block body%}
+<div class="quote">
 {% for n in set %}
 
 {% if n.name == qname %}
     {{n.quote}}
+    
     
 
 
 
 {%endif%}
 
+
  
 {%endfor%}
+
+</div>
 
 {%endblock body%}

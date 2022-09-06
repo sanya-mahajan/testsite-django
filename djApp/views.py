@@ -1,10 +1,12 @@
-from django.shortcuts import render,HttpResponse,redirect
+
+from django.urls import reverse
+from django.shortcuts import render,HttpResponse,redirect,HttpResponseRedirect
 #rendering for response as templates
 from datetime import datetime
 from django.contrib.auth.models import User
 from userAuth import views #for using the login view
-
-from .models import data
+from django import forms
+from .models import data,mood
 
 #attributs views.attribute
 
@@ -15,13 +17,23 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/login')
 def index(request):
-    context ={
-        'variable':"value of the var in CONTEXT sent with index.html",
-        'variable2':"context is a dictionary!"
+
+    if(request.method=="POST"):
+        
+        myform =mood(request.POST)
+        if myform.is_valid():
+            feels=myform.cleaned_data['mood_field']
+            context ={
+                
+                'feels': feels
 
     }
+            return render(request,'index.html',context)#dont encode urls directly
     
     
+    context={
+        'moodform': mood
+    }
 
     return render(request,'index.html',context)
     
@@ -59,19 +71,25 @@ def services(request):
 
 
 def your_space(request):
-    names=[]
+    
+
+    name= request.POST.get('inpname')
+    if data.objects.filter(name=name).exists():
+        context={
+        'set' : data.objects.all(),
+        'qname' : request.POST.get('inpname')  
+    }
+        return render(request,'quotes.html',context)    
+    else:
+        from django.contrib import messages
+        messages.info(request,'please submit your data')
+        return HttpResponseRedirect(reverse('servicespage'))
+        
+    
 
     
         
          
             
             
-    context={
-        'set' : data.objects.all(),
-        'qname' : request.POST.get('inpname')  #ummm
-    }
     
-
-
-
-    return render(request,'quotes.html',context)    
