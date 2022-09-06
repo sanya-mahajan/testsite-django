@@ -1,0 +1,2 @@
+# testsite-django
+learnt basics 
